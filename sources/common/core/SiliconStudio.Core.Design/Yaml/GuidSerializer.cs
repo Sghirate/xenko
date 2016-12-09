@@ -1,16 +1,16 @@
 ﻿// Copyright (c) 2014 Silicon Studio Corp. (http://siliconstudio.co.jp)
 // This file is distributed under GPL v3. See LICENSE.md for details.
 using System;
-using SharpYaml.Events;
-using SharpYaml.Serialization;
 using SiliconStudio.Core.Reflection;
+using SiliconStudio.Core.Yaml.Events;
+using SiliconStudio.Core.Yaml.Serialization;
 
 namespace SiliconStudio.Core.Yaml
 {
     /// <summary>
     /// A Yaml serializer for <see cref="Guid"/>
     /// </summary>
-    [YamlSerializerFactory]
+    [YamlSerializerFactory(YamlSerializerFactoryAttribute.Default)]
     internal class GuidSerializer : AssetScalarSerializerBase
     {
         static GuidSerializer()

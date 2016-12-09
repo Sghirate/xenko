@@ -3,12 +3,11 @@
 using System;
 using System.Reflection;
 using System.Text;
-using SharpYaml;
-using SharpYaml.Events;
-using SharpYaml.Serialization;
 using SiliconStudio.Assets.Serializers;
 using SiliconStudio.Core;
 using SiliconStudio.Core.Yaml;
+using SiliconStudio.Core.Yaml.Events;
+using SiliconStudio.Core.Yaml.Serialization;
 
 namespace SiliconStudio.Assets.Tests
 {
@@ -16,7 +15,7 @@ namespace SiliconStudio.Assets.Tests
     /// We are copying the PropertyKey serializer from Xenko.Assets assembly to here in order 
     /// to validate our tests.
     /// </summary>
-    [YamlSerializerFactory]
+    [YamlSerializerFactory(YamlSerializerFactoryAttribute.Default)]
     internal class PropertyKeySerializerTest : AssetScalarSerializerBase
     {
         public override bool CanVisit(Type type)

@@ -1,19 +1,18 @@
 ﻿// Copyright (c) 2014 Silicon Studio Corp. (http://siliconstudio.co.jp)
 // This file is distributed under GPL v3. See LICENSE.md for details.
 using System;
-using SharpYaml;
-using SharpYaml.Events;
-using SharpYaml.Serialization;
 using SiliconStudio.Core;
 using SiliconStudio.Core.Reflection;
 using SiliconStudio.Core.Yaml;
+using SiliconStudio.Core.Yaml.Events;
+using SiliconStudio.Core.Yaml.Serialization;
 
 namespace SiliconStudio.Assets.Serializers
 {
     /// <summary>
     /// A Yaml serializer for <see cref="PackageReference"/>
     /// </summary>
-    [YamlSerializerFactory]
+    [YamlSerializerFactory(YamlAssetProfile.Name)]
     internal class PackageReferenceSerializer : AssetScalarSerializerBase
     {
         public override bool CanVisit(Type type)

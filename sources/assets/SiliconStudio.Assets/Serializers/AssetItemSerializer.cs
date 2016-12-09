@@ -2,14 +2,12 @@
 // This file is distributed under GPL v3. See LICENSE.md for details.
 using System;
 using System.ComponentModel;
-
-using SharpYaml.Serialization;
-using SharpYaml.Serialization.Serializers;
 using SiliconStudio.Core;
 using SiliconStudio.Core.IO;
 using SiliconStudio.Core.Reflection;
 using SiliconStudio.Core.Yaml;
-using ITypeDescriptor = SharpYaml.Serialization.ITypeDescriptor;
+using SiliconStudio.Core.Yaml.Serialization;
+using SiliconStudio.Core.Yaml.Serialization.Serializers;
 
 namespace SiliconStudio.Assets.Serializers
 {
@@ -17,7 +15,7 @@ namespace SiliconStudio.Assets.Serializers
     /// A Yaml Serializer for <see cref="AssetBase"/>. Because this type is immutable
     /// we need to implement a special serializer.
     /// </summary>
-    [YamlSerializerFactory]
+    [YamlSerializerFactory(YamlAssetProfile.Name)]
     internal class AssetItemSerializer : ObjectSerializer, IDataCustomVisitor
     {
         public override IYamlSerializable TryCreate(SerializerContext context, ITypeDescriptor typeDescriptor)

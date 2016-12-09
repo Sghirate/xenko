@@ -3,11 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SharpYaml;
-using SharpYaml.Events;
 using SiliconStudio.Core.Extensions;
 using SiliconStudio.Core.IO;
 using SiliconStudio.Core.Yaml;
+using SiliconStudio.Core.Yaml.Events;
 
 namespace SiliconStudio.Core.Settings
 {
@@ -262,7 +261,7 @@ namespace SiliconStudio.Core.Settings
             try
             {
                 var eventReader = new EventReader(new MemoryParser(parsingEvents));
-                return YamlSerializer.Deserialize(eventReader, Type);
+                return SettingsYamlSerializer.Default.Deserialize(eventReader, Type);
             }
             catch (Exception e)
             {

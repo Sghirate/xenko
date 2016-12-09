@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using SharpYaml.Events;
 using SiliconStudio.Core.IO;
 using SiliconStudio.Core.Yaml;
+using SiliconStudio.Core.Yaml.Events;
 
 namespace SiliconStudio.Core.Settings
 {
@@ -39,7 +39,7 @@ namespace SiliconStudio.Core.Settings
                 throw new InvalidOperationException();
 
             parsingEvents = new List<ParsingEvent>();
-            YamlSerializer.Serialize(new ParsingEventListEmitter(parsingEvents), Value, key.Type);
+            SettingsYamlSerializer.Default.Serialize(new ParsingEventListEmitter(parsingEvents), Value, key.Type);
 
             return parsingEvents;
         }

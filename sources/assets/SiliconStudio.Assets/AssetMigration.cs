@@ -5,14 +5,12 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
-
-using SharpYaml;
-using SharpYaml.Events;
-using SharpYaml.Serialization;
 using SiliconStudio.Assets.Serializers;
 using SiliconStudio.Core.Diagnostics;
 using SiliconStudio.Core.Yaml;
 using System.Linq;
+using SiliconStudio.Core.Yaml.Events;
+using SiliconStudio.Core.Yaml.Serialization;
 
 namespace SiliconStudio.Assets
 {
@@ -32,8 +30,8 @@ namespace SiliconStudio.Assets
 
             assetFileExtension = assetFileExtension.ToLowerInvariant();
 
-            var serializer = AssetSerializer.FindSerializer(assetFileExtension);
-            if (!(serializer is AssetYamlSerializer))
+            var serializer = AssetFileSerializer.FindSerializer(assetFileExtension);
+            if (!(serializer is YamlAssetSerializer))
                 return false;
 
             // We've got a Yaml asset, let's get expected and serialized versions
@@ -53,8 +51,7 @@ namespace SiliconStudio.Assets
                 yamlEventReader.Expect<DocumentStart>();
                 var mappingStart = yamlEventReader.Expect<MappingStart>();
 
-                var yamlSerializerSettings = YamlSerializer.GetSerializerSettings();
-                var tagTypeRegistry = yamlSerializerSettings.TagTypeRegistry;
+                var tagTypeRegistry = AssetYamlSerializer.Default.GetSerializerSettings().TagTypeRegistry;
                 bool typeAliased;
                 assetType = tagTypeRegistry.TypeFromTag(mappingStart.Tag, out typeAliased);
 
@@ -83,7 +80,7 @@ namespace SiliconStudio.Assets
                                 yamlAsset.DynamicRootNode.RemoveChild(nameof(Asset.SerializedVersion));
                                 AssetUpgraderBase.SetSerializableVersion(yamlAsset.DynamicRootNode, dependencyName, serializedVersion);
 
-                                var baseBranch = yamlAsset.DynamicRootNode[Asset.BaseProperty];
+                                var baseBranch = yamlAsset.DynamicRootNode["~Base"];
                                 if (baseBranch != null)
                                 {
                                     var baseAsset = baseBranch["Asset"];

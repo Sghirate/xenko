@@ -3,7 +3,7 @@
 
 using System;
 using System.ComponentModel;
-
+using SiliconStudio.Assets;
 using SiliconStudio.Core;
 using SiliconStudio.Core.Annotations;
 using SiliconStudio.Core.Serialization;
@@ -27,11 +27,11 @@ namespace SiliconStudio.Xenko.Rendering.Materials
             Attributes = new MaterialAttributes();
             Layers = new MaterialBlendLayers();
             // An instance id, only used to match descriptor
-            MaterialId = Guid.NewGuid();
+            MaterialId = AssetId.New();
         }
 
         [DataMemberIgnore]
-        public Guid MaterialId { get; set; }
+        public AssetId MaterialId { get; set; }
 
         /// <summary>
         /// Gets or sets the material attributes.
@@ -49,7 +49,7 @@ namespace SiliconStudio.Xenko.Rendering.Materials
         [DefaultValue(null)]
         [DataMember(20)]
         [NotNull]
-        [NotNullItems]
+        [MemberCollection(NotNullItems = true)]
         public MaterialBlendLayers Layers { get; set; }
 
         public void Visit(MaterialGeneratorContext context)

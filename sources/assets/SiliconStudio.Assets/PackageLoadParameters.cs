@@ -27,12 +27,19 @@ namespace SiliconStudio.Assets
 
         public PackageLoadParameters()
         {
+            LoadMissingDependencies = true;
             LoadAssemblyReferences = true;
             AutoCompileProjects = true;
             AutoLoadTemporaryAssets = true;
             ConvertUPathToAbsolute = true;
             BuildConfiguration = "Debug";
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [load missing dependencies].
+        /// </summary>
+        /// <value><c>true</c> if [load missing dependencies]; otherwise, <c>false</c>.</value>
+        public bool LoadMissingDependencies { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [load assembly references].
@@ -99,6 +106,11 @@ namespace SiliconStudio.Assets
         /// </summary>
         /// <value>The generate new asset ids.</value>
         public bool GenerateNewAssetIds { get; set; }
+
+        /// <summary>
+        /// If <c>true</c>, unloadable objects will be removed, similar to <see cref="AssetClonerFlags.RemoveUnloadableObjects"/>.
+        /// </summary>
+        public bool RemoveUnloadableObjects { get; set; }
 
         /// <summary>
         /// Occurs when one or more package upgrades are required for a single package. Returning false will cancel upgrades on this package.

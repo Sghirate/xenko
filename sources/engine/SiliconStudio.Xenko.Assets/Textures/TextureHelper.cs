@@ -70,7 +70,8 @@ namespace SiliconStudio.Xenko.Assets.Textures
                 DesiredAlpha = asset.Alpha;
                 TextureHint = asset.Hint;
                 GenerateMipmaps = asset.GenerateMipmaps;
-                PremultiplyAlpha = asset.PremultiplyAlpha;
+                if (asset.Alpha != AlphaFormat.None)
+                    PremultiplyAlpha = asset.PremultiplyAlpha;
                 ColorKeyColor  = asset.ColorKeyColor;
                 ColorKeyEnabled = asset.ColorKeyEnabled;
                 TextureQuality = textureParameters.TextureQuality;
@@ -269,9 +270,7 @@ namespace SiliconStudio.Xenko.Assets.Textures
                             }
                             break;
                         case PlatformType.Windows:
-                        case PlatformType.WindowsPhone:
-                        case PlatformType.WindowsStore:
-                        case PlatformType.Windows10:
+                        case PlatformType.UWP:
                         case PlatformType.Linux:
                         case PlatformType.macOS:
                             switch (parameters.GraphicsPlatform)

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2014 Silicon Studio Corp. (http://siliconstudio.co.jp)
 // This file is distributed under GPL v3. See LICENSE.md for details.
 using System;
-using SharpYaml;
-using SharpYaml.Events;
-using SharpYaml.Serialization;
+using SiliconStudio.Assets.Serializers;
 using SiliconStudio.Core;
 using SiliconStudio.Core.Yaml;
+using SiliconStudio.Core.Yaml.Events;
+using SiliconStudio.Core.Yaml.Serialization;
 using SiliconStudio.Xenko.Rendering;
 
 namespace SiliconStudio.Xenko.Assets.Serializers
@@ -13,7 +13,7 @@ namespace SiliconStudio.Xenko.Assets.Serializers
     /// <summary>
     /// A Yaml serializer for <see cref="ParameterKey"/>
     /// </summary>
-    [YamlSerializerFactory]
+    [YamlSerializerFactory(YamlAssetProfile.Name)]
     internal class ParameterKeySerializer : AssetScalarSerializerBase
     {
         public override bool CanVisit(Type type)
